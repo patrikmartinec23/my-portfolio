@@ -1,23 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import HomeHero from './components/HomeHero';
 import AboutMe from './components/AboutMe';
+import Projects from './components/Projects';
 import './styles/App.scss';
 
 function App() {
-    const [activeSection, setActiveSection] = useState('home');
+    const [activeSection, setActiveSection] = useState(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('section') || 'home';
+    });
+
+    useEffect(() => {
+        const url = new URL(window.location);
+        if (activeSection === 'home') {
+            url.searchParams.delete('section');
+        } else {
+            url.searchParams.set('section', activeSection);
+        }
+        window.history.replaceState({}, '', url);
+    }, [activeSection]);
 
     const renderContent = () => {
         switch (activeSection) {
             case 'home':
                 return <HomeHero />;
             case 'projects':
-                return (
-                    <div className="hero-content">
-                        <h1>My Projects</h1>
-                    </div>
-                );
+                return <Projects />;
             case 'about':
                 return <AboutMe />;
             default:
@@ -27,16 +37,23 @@ function App() {
 
     return (
         <div className="app-container">
-            <div className="sidebar-container">
+            <a href="#main-content" className="skip-link">
+                Skip to main content
+            </a>
+            <aside className="sidebar-container">
                 <Sidebar />
-            </div>
+            </aside>
             <div className="main-content">
-                <Navbar
-                    activeSection={activeSection}
-                    setActiveSection={setActiveSection}
-                />
+                <header>
+                    <Navbar
+                        activeSection={activeSection}
+                        setActiveSection={setActiveSection}
+                    />
+                </header>
                 <div className="divider-horizontal"></div>
-                <main className="content">{renderContent()}</main>
+                <main id="main-content" className="content">
+                    {renderContent()}
+                </main>
             </div>
         </div>
     );

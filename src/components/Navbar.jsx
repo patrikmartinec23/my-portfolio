@@ -25,8 +25,16 @@ const Navbar = ({ activeSection, setActiveSection }) => {
         },
     ];
 
+    const handleSectionChange = (sectionId) => {
+        setActiveSection(sectionId);
+        // Allow DOM update to process
+        setTimeout(() => {
+            document.getElementById('main-content').focus();
+        }, 100);
+    };
+
     return (
-        <nav className="navbar">
+        <nav className="navbar" aria-label="Main navigation">
             <div className="navbar-container">
                 {navItems.map((item) => (
                     <button
@@ -34,7 +42,10 @@ const Navbar = ({ activeSection, setActiveSection }) => {
                         className={`nav-item ${
                             activeSection === item.id ? 'active' : ''
                         }`}
-                        onClick={() => setActiveSection(item.id)}
+                        onClick={() => handleSectionChange(item.id)}
+                        aria-current={
+                            activeSection === item.id ? 'page' : undefined
+                        }
                     >
                         <span className="nav-icon">{item.icon}</span>
                         <span className="nav-label">{item.label}</span>

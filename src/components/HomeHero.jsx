@@ -154,10 +154,36 @@ const HomeHero = () => {
         const GRAVITY = 0.4;
         const FRICTION = 0.98;
         const BOUNCE = 0.75;
-        const BALL_RADIUS = 40;
+
+        // Replace this line:
+        // const BALL_RADIUS = 40;
+
+        // With this responsive ball sizing:
+        const getBallRadius = () => {
+            if (window.innerWidth >= 1600) {
+                return 55; // Ultra-wide screens: 55px radius
+            } else if (window.innerWidth >= 1280) {
+                return 48; // Large screens: 48px radius
+            } else {
+                return 40; // Default screens: 40px radius
+            }
+        };
+
+        const BALL_RADIUS = getBallRadius();
+
+        // Check if device is mobile
+        const isMobile = window.innerWidth < 768;
+        const ballCount = isMobile
+            ? Math.min(8, techStack.length)
+            : techStack.length;
+
+        // If mobile, use only the first 8 tech items
+        const visibleTech = isMobile
+            ? techStack.slice(0, ballCount)
+            : techStack;
 
         // Create balls with proper initial positioning
-        const balls = techStack.map((tech, index) => ({
+        const balls = visibleTech.map((tech, index) => ({
             id: tech.id,
             x:
                 MARGIN +
@@ -439,13 +465,76 @@ const HomeHero = () => {
 
         // Resize handler
         const handleResize = () => {
+            const newRadius = getBallRadius();
+            const newIsMobile = window.innerWidth < 768;
+
+            // Update canvas size
             canvas.width = container.offsetWidth;
             canvas.height = container.offsetHeight;
             playArea.right = canvas.width - MARGIN;
             playArea.bottom = canvas.height - MARGIN;
+
+            // Update ball radius for all balls
+            balls.forEach((ball) => {
+                ball.radius = newRadius;
+
+                // Keep balls within new boundaries
+                if (ball.x + ball.radius > playArea.right) {
+                    ball.x = playArea.right - ball.radius;
+                }
+                if (ball.x - ball.radius < playArea.left) {
+                    ball.x = playArea.left + ball.radius;
+                }
+                if (ball.y + ball.radius > playArea.bottom) {
+                    ball.y = playArea.bottom - ball.radius;
+                }
+                if (ball.y - ball.radius < playArea.top) {
+                    ball.y = playArea.top + ball.radius;
+                }
+            });
+
+            // If device type changed (mobile/desktop), adjust ball count
+            if (newIsMobile !== isMobile) {
+                const newBallCount = newIsMobile
+                    ? Math.min(8, techStack.length)
+                    : techStack.length;
+
+                // Add or remove balls as needed
+                if (newIsMobile && balls.length > newBallCount) {
+                    // Remove extra balls for mobile
+                    balls.splice(newBallCount);
+                } else if (!newIsMobile && balls.length < techStack.length) {
+                    // Add missing balls for desktop
+                    const missingTech = techStack.slice(balls.length);
+                    const newBalls = missingTech.map((tech) => ({
+                        id: tech.id,
+                        x:
+                            MARGIN +
+                            BALL_RADIUS +
+                            Math.random() *
+                                (canvas.width - MARGIN * 2 - BALL_RADIUS * 2),
+                        y:
+                            MARGIN +
+                            BALL_RADIUS +
+                            Math.random() *
+                                ((canvas.height - MARGIN * 2) * 0.6),
+                        dx: (Math.random() - 0.5) * 4,
+                        dy: Math.random() * 2,
+                        radius: newRadius,
+                        icon: tech.icon,
+                        color: tech.color,
+                        name: tech.name,
+                        mass: 1,
+                    }));
+                    balls.push(...newBalls);
+                }
+            }
         };
+
+        // Add resize event listener
         window.addEventListener('resize', handleResize);
 
+        // Cleanup function
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -459,7 +548,9 @@ const HomeHero = () => {
                     👋
                 </h1>
                 <hr className="hero-divider" />
-                <h2>Web Developer & UI/UX Designer</h2>
+                <h2 className="hero-subtitle">
+                    Web Developer & UI/UX Designer
+                </h2>
                 <canvas ref={canvasRef} className="hero-canvas"></canvas>
             </div>
         </div>

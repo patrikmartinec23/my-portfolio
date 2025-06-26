@@ -7,6 +7,9 @@
   height: 100vh;
   background-color: $secondary-color;
   overflow: hidden;
+  max-width: 1920px; // Maximum total width
+  margin: 0 auto; // Center entire layout
+  width: 100%;
 }
 
 .sidebar-container {
@@ -22,14 +25,15 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  max-width: 1400px; // Limit content width on large screens
+  margin: 0 auto; // Center the content
 }
 
-// Horizontal divider spanning across the sidebar and navbar
 .divider-horizontal {
-  position: absolute;
+  position: fixed; // Changed from absolute to fixed
   top: 75px;
   left: 0;
-  width: 100vw;
+  width: 100vw; // Full viewport width
   height: 2px;
   background-color: rgba(255, 255, 255, 0.15);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -40,13 +44,17 @@
   flex: 1;
   padding: $spacing-unit * 1.35;
   color: white;
-  margin-top: 20px;
+  margin-top: 14px;
   height: calc(100vh - 95px);
   overflow: hidden;
+  max-width: 1200px; // Maximum content width
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .hero-content {
-  margin-top: $spacing-unit * 2;
+  margin-top: $spacing-unit * 1.35;
   height: 100%;
   overflow: hidden;
 }

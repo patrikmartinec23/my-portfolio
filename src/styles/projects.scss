@@ -1,0 +1,252 @@
+@use './main.scss' as *;
+
+.projects-container {
+  position: relative;
+  text-align: start;
+  padding: $spacing-unit * 2;
+  border: 2px solid rgba(255, 255, 255, 0.25); 
+  border-radius: $border-radius-md; 
+  box-shadow: $box-shadow-md;
+  height: 95%;
+  width: 95%;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-header {
+  margin-bottom: $spacing-unit * 2;
+}
+
+.projects-title {
+  font-size: $font-xxl;
+  color: white;
+  margin-bottom: $spacing-unit * 2;
+  margin-top: $spacing-unit;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.projects-divider {
+  width: 90%;
+  height: 2px;
+  margin: $spacing-unit auto;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+}
+
+.projects-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-title {
+  font-size: $font-lg;
+  color: white;
+  margin-bottom: $spacing-unit;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.project-slideshow {
+    width: 90%;
+    height:68%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: $spacing-unit * 0.5;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.arrow-left, .arrow-right {
+    width: 40px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba($accent-color, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: rgba($accent-color, 1);
+    font-size: $font-lg;
+    
+    &:hover {
+        background: rgba($accent-color, 0.1);
+        border-color: $accent-color;
+        color: $accent-color;
+        transform: scale(1.05);
+    }
+    
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.arrow-left {
+    border-radius: 24px 0 0 24px;
+}
+
+.arrow-right {
+    border-radius: 0 24px 24px 0;
+}
+
+.project-card {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.25); 
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        border-color: rgba($accent-color, 0.5);
+        transform: translateY(-2px);
+    }
+}
+
+.project-image-side {
+    width: 45%;
+    height: 80%;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    position: relative;
+    margin-right: $spacing-unit * 2;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.project-image-full {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    &:hover img {
+        transform: scale(1.1);
+    }
+}
+
+.project-overlay-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $spacing-unit * 2;
+}
+
+.project-header-full {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.project-title-badge {
+    background: rgba($accent-color, 0.2);
+    color: white;
+    padding: $spacing-unit * 0.5 $spacing-unit;
+    border-radius: $border-radius-md;
+    font-size: $font-md;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.project-link-badge {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    padding: $spacing-unit * 0.5;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-md;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: $accent-color;
+        transform: scale(1.1);
+    }
+}
+
+.project-footer-full {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-unit;
+}
+
+.project-description-badge {
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    padding: $spacing-unit;
+    border-radius: $border-radius-md;
+    font-size: $font-sm;
+    line-height: 1.5;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-technologies-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-unit * 0.5;
+}
+
+.tech-badge-full {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    padding: $spacing-unit * 0.25 $spacing-unit * 0.75;
+    border-radius: $border-radius-lg;
+    font-size: $font-xs;
+    font-weight: 500;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.color {
+  color: $accent-color; 
+}
+
+// Responsive design
+@media (max-width: $breakpoint-md) {
+  .projects-title {
+    font-size: $font-xl;
+  }
+}

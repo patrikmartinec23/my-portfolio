@@ -3,11 +3,39 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- In index.html -->
+        <!-- Update the meta description -->
+        <meta
+            name="description"
+            content="Patrik Martinec | Full Stack Developer & UI/UX Designer from Slovenia specializing in React, JavaScript and responsive web applications. Based in Slovenia, creating modern digital solutions and web applications also using REST APIs, Node.js, and Express.js."
+        />
+
+        <!-- Add these additional tags for local SEO -->
+        <meta name="geo.region" content="SI" />
+        <meta name="geo.placename" content="Slovenia" />
+        <meta
+            name="keywords"
+            content="Full Stack Developer, UI/UX Designer, Web Developer, React Developer, JavaScript Developer, Slovenia Developer, Slovenia, Slovenski razvijalec"
+        />
         <title>Patrik Martinec | Portfolio</title>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Patrik Martinec",
+                "jobTitle": "Full Stack Developer & UI/UX Designer",
+                "nationality": "Slovenian",
+                "url": "https://patrikmartinec.com",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "Slovenia"
+                }
+            }
+        </script>
     </head>
     <body>
         <div id="root"></div>

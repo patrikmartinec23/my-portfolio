@@ -26,7 +26,7 @@ const Sidebar = () => {
             <div className="profile-image-container">
                 <img
                     src={profilePic}
-                    alt="Patrik Martinec"
+                    alt="Patrik Martinec - Web Developer and UI/UX Designer"
                     className="profile-image"
                 />
             </div>
@@ -42,7 +42,14 @@ const Sidebar = () => {
                     <span className="info-text">Slovenia, Maribor</span>
                 </div>
 
-                <div className="info-item email-item" onClick={copyEmail}>
+                <div
+                    className="info-item email-item"
+                    onClick={copyEmail}
+                    onKeyDown={(e) => e.key === 'Enter' && copyEmail()}
+                    tabIndex="0"
+                    role="button"
+                    aria-label="Copy email address to clipboard"
+                >
                     <FontAwesomeIcon icon={faEnvelope} className="info-icon" />
                     <span className="info-text">
                         patrik.martinec1@gmail.com

@@ -6,9 +6,9 @@ const AboutMe = () => {
         <div className="hero-content">
             <div className="about-container">
                 <div className="about-header">
-                    <h1 className="about-title">
+                    <h2 className="about-title">
                         More <span className="color">About Me</span>
-                    </h1>
+                    </h2>
                     <hr className="about-divider" />
                 </div>
 
