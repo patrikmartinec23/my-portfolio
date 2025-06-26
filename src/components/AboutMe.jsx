@@ -1,18 +1,17 @@
-import React from 'react';
 import '../styles/about-me.scss';
 
 const AboutMe = () => {
     return (
-        <div className="hero-content">
-            <div className="about-container">
-                <div className="about-header">
+        <section className="hero-content">
+            <article className="about-container">
+                <header className="about-header">
                     <h2 className="about-title">
                         More <span className="color">About Me</span>
                     </h2>
                     <hr className="about-divider" />
-                </div>
+                </header>
 
-                <div className="about-content">
+                <section className="about-content">
                     <ul className="about-list">
                         <li>
                             <p>
@@ -39,9 +38,9 @@ const AboutMe = () => {
                             </p>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </div>
+                </section>
+            </article>
+        </section>
     );
 };
 

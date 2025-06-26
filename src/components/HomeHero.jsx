@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useRef } from 'react';
 import {
     faReact,
     faJs,
@@ -17,7 +16,6 @@ import {
     faDatabase,
     faServer,
     faLeaf,
-    faTable,
     faBolt,
     faFire,
 } from '@fortawesome/free-solid-svg-icons';
@@ -50,7 +48,7 @@ const techStack = [
     },
     {
         id: 'tailwind',
-        icon: faBolt, // Lightning bolt for TailwindCSS (speed)
+        icon: faBolt,
         color: '#06B6D4',
         name: 'Tailwind',
     },
@@ -62,7 +60,7 @@ const techStack = [
     },
     {
         id: 'express',
-        icon: faServer, // Server icon for Express
+        icon: faServer,
         color: '#000000',
         name: 'Express',
     },
@@ -98,13 +96,13 @@ const techStack = [
     },
     {
         id: 'cpp',
-        icon: faDatabase, // Using database icon as placeholder for C++
+        icon: faDatabase,
         color: '#00599C',
         name: 'C++',
     },
     {
         id: 'firebase',
-        icon: faFire, // Fire icon for Firebase
+        icon: faFire,
         color: '#FFCA28',
         name: 'Firebase',
     },
@@ -541,19 +539,21 @@ const HomeHero = () => {
     }, []);
 
     return (
-        <div className="hero-content">
-            <div className="hero-container" ref={containerRef}>
-                <h1 className="hero-title">
-                    Hi there! I'm <br /> <span className="color">Patrik.</span>{' '}
-                    👋
-                </h1>
-                <hr className="hero-divider" />
+        <section className="hero-content">
+            <article className="hero-container" ref={containerRef}>
+                <header>
+                    <h1 className="hero-title">
+                        Hi there! I'm <br />{' '}
+                        <span className="color">Patrik.</span> 👋
+                    </h1>
+                    <hr className="hero-divider" />
+                </header>
                 <h2 className="hero-subtitle">
                     Web Developer & UI/UX Designer
                 </h2>
                 <canvas ref={canvasRef} className="hero-canvas"></canvas>
-            </div>
-        </div>
+            </article>
+        </section>
     );
 };
 

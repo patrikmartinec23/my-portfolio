@@ -21,19 +21,21 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="sidebar">
+        <section className="sidebar">
             <ToastContainer /> {/* Toast container for notifications */}
-            <div className="profile-image-container">
-                <img
-                    src={profilePic}
-                    alt="Patrik Martinec - Web Developer and UI/UX Designer"
-                    className="profile-image"
-                />
-            </div>
-            <div className="spacer"></div>
-            <h1 className="name">Patrik Martinec</h1>
+            <header>
+                <figure className="profile-image-container">
+                    <img
+                        src={profilePic}
+                        alt="Patrik Martinec - Web Developer and UI/UX Designer"
+                        className="profile-image"
+                    />
+                </figure>
+                <div className="spacer"></div>
+                <h1 className="name">Patrik Martinec</h1>
+            </header>
             <button className="work-with-me-btn">Work with me</button>
-            <div className="info-section">
+            <section className="info-section">
                 <div className="info-item">
                     <FontAwesomeIcon
                         icon={faMapMarkerAlt}
@@ -55,9 +57,9 @@ const Sidebar = () => {
                         patrik.martinec1@gmail.com
                     </span>
                 </div>
-            </div>
+            </section>
             <hr className="divider" />
-            <div className="social-links">
+            <footer className="social-links">
                 <a
                     href="https://github.com/yourusername"
                     target="_blank"
@@ -90,8 +92,8 @@ const Sidebar = () => {
                 >
                     <FaYoutube className="social-icon" />
                 </a>
-            </div>
-        </div>
+            </footer>
+        </section>
     );
 };
 

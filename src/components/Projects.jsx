@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faChevronLeft,
@@ -58,19 +58,22 @@ const Projects = () => {
     };
 
     return (
-        <div className="hero-content">
-            <div className="projects-container">
-                <div className="projects-header">
+        <section className="hero-content">
+            <article className="projects-container">
+                <header className="projects-header">
                     <h2 className="projects-title">
                         Check Out My <span className="color">Work</span>
                     </h2>
                     <hr className="projects-divider" />
-                </div>
-
-                <div className="project-slideshow">
-                    <div className="arrow-left" onClick={prevProject}>
+                </header>
+                <section className="project-slideshow">
+                    <button
+                        className="arrow-left"
+                        aria-label="Previous project"
+                        onClick={prevProject}
+                    >
                         <FontAwesomeIcon icon={faChevronLeft} />
-                    </div>
+                    </button>
                     <article
                         className="project-card"
                         onClick={openDemo}
@@ -115,12 +118,16 @@ const Projects = () => {
                             </div>
                         </div>
                     </article>
-                    <div className="arrow-right" onClick={nextProject}>
+                    <button
+                        className="arrow-right"
+                        aria-label="Next project"
+                        onClick={nextProject}
+                    >
                         <FontAwesomeIcon icon={faChevronRight} />
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </button>
+                </section>
+            </article>
+        </section>
     );
 };
 
