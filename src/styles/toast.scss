@@ -1,0 +1,34 @@
+@use './main.scss' as *;
+
+// Toast notification styling
+.Toastify__toast-container {
+  font-family: $font-main !important;
+}
+
+.Toastify__toast {
+  background-color: $secondary-color !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: $border-radius-md !important;
+  box-shadow: $box-shadow-md !important;
+  font-size: $font-sm !important;
+}
+
+.Toastify__toast--success {
+  background-color: rgba($secondary-color, 0.9) !important;
+  border-color: $accent-color !important;
+
+}
+
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: $accent-color !important;
+}
+
+.Toastify__close-button {
+  color: white !important;
+  opacity: 0.8 !important;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1 !important;
+}

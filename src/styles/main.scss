@@ -1,0 +1,49 @@
+// Variables are now properly formatted for sharing
+$primary-color: #ff0055;
+$font-main: 'Inter', sans-serif;
+$spacing-unit: 1rem;
+
+$font-xs: 1rem;   // 14px
+$font-sm: 1.35rem;       // 16px
+$font-md: 1.65rem;    // 28px
+$font-lg: 2rem;       // 32px
+$font-xl: 2.5rem;     // 40px
+$font-xxl: 4.5rem;      // 80px
+
+
+$secondary-color: #1E1E1E;
+$background-color: #ffffff;
+$text-color: #222222;
+$muted-text-color: #666666;
+$accent-color: #C0C0C0;
+
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+
+$box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$box-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+html, body {
+  font-family: $font-main;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+// Apply font family to common text elements
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
+  font-family: $font-main;
+}

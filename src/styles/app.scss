@@ -1,0 +1,94 @@
+@use './main.scss' as *;
+@use './toast.scss';
+
+.app-container {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  background-color: $secondary-color;
+  overflow: hidden;
+}
+
+.sidebar-container {
+  flex-shrink: 0;
+  width: 450px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// Horizontal divider spanning across the sidebar and navbar
+.divider-horizontal {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 100vw;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.content {
+  flex: 1;
+  padding: $spacing-unit * 1.35;
+  color: white;
+  margin-top: 20px;
+  height: calc(100vh - 95px);
+  overflow: hidden;
+}
+
+.hero-content {
+  margin-top: $spacing-unit * 2;
+  height: 100%;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: $font-xl;
+  margin-bottom: $spacing-unit;
+}
+
+h2 {
+  font-size: $font-lg;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: $spacing-unit * 2;
+}
+
+// For responsive design - ONLY scroll on mobile
+@media (max-width: $breakpoint-md) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .divider-horizontal {
+    top: auto;
+    width: 100%;
+  }
+
+  .sidebar-container {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    position: relative;
+  }
+
+  .main-content {
+    height: auto;
+    flex: 1;
+  }
+
+  .content {
+    margin-left: 0;
+    height: auto;
+  }
+}

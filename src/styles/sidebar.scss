@@ -1,0 +1,140 @@
+@use './main.scss' as *;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 450px; 
+  padding: $spacing-unit * 2;
+  background-color: $secondary-color;
+  color: white;
+  position: relative;
+  padding-top: 320px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.profile-image-container {
+  margin-bottom: $spacing-unit * 1.5;
+  align-self: center;
+  width: 296px;
+  height: 296px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 40px;
+  z-index: 20;
+}
+
+.profile-image {
+  width: 296px;
+  height: 296px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.95px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 2.95px $accent-color;
+  display: block;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale3d(1.05, 1.05, 1);
+  }
+}
+
+.name {
+  font-size: $font-xl;
+  font-weight: 500;
+  margin-bottom: $spacing-unit;
+  text-align: start;
+}
+
+.work-with-me-btn {
+  background-color: rgba($accent-color, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: $border-radius-lg;
+  padding: $spacing-unit * 0.35;
+  font-size: $font-md;
+  cursor: pointer;
+  margin-bottom: $spacing-unit * 1.5;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.info-section {
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-unit * 0.5;
+  
+  &.email-item {
+    cursor: pointer;
+    position: relative;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.info-icon {
+  margin-right: $spacing-unit * 0.5;
+  font-size: $font-md;
+}
+
+.info-text {
+  font-size: $font-sm;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.copied-tooltip {
+  position: absolute;
+  right: 0;
+  background-color: $accent-color;
+  color: white;
+  padding: 2px 6px;
+  border-radius: $border-radius-sm;
+  font-size: $font-xs;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: rgba($accent-color, 0.2);
+  border: none;
+  margin: $spacing-unit 0;
+}
+
+.social-links {
+  display: flex;
+  justify-content: space-around;
+  gap: $spacing-unit * 0.05;
+}
+
+.social-link {
+  color: white;
+  font-size: $font-xl;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+.spacer {
+  height: $spacing-unit * 2;
+}
+
+// For responsive design
+@media (max-width: $breakpoint-md) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+  }
+}
