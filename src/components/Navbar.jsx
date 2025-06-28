@@ -5,7 +5,7 @@ import {
     faPenRuler,
     faUserAstronaut,
 } from '@fortawesome/free-solid-svg-icons';
-import '../styles/Navbar.scss';
+import '../styles/navbar.scss';
 
 const Navbar = ({ activeSection, setActiveSection }) => {
     const [indicatorStyle, setIndicatorStyle] = useState({});
