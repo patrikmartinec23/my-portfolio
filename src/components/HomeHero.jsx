@@ -452,6 +452,7 @@ const HomeHero = () => {
         canvas.addEventListener(
             'touchmove',
             (e) => {
+                e.preventDefault(); // Prevent scrolling
                 const rect = canvas.getBoundingClientRect();
                 if (e.touches && e.touches.length > 0) {
                     mouse.x = e.touches[0].clientX - rect.left;
