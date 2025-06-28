@@ -1,0 +1,180 @@
+@use './main.scss' as *;
+
+.contact-container {
+  position: relative;
+  text-align: start;
+  padding: $spacing-unit * 2;
+  border: 2px solid rgba(255, 255, 255, 0.25); 
+  border-radius: $border-radius-md; 
+  box-shadow: $box-shadow-md;
+  height: 95%;
+  width: 95%;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-header {
+  margin-bottom: $spacing-unit;
+}
+
+.contact-title {
+  font-size: $font-xxl;
+  color: white;
+  margin-bottom: $spacing-unit * 2;
+  margin-top: $spacing-unit;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.contact-divider {
+  width: 90%;
+  height: 2px;
+  margin: $spacing-unit auto;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+}
+
+.contact-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit * 2;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.contact-form-layout {
+  display: flex;
+  gap: $spacing-unit * 2;
+  width: 100%;
+}
+
+.contact-form-left, 
+.contact-form-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-group textarea {
+  flex: 1;
+  min-height: 100px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit;
+}
+
+.form-row {
+  display: flex;
+  gap: $spacing-unit;
+  
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  
+  label {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: $spacing-unit * 0.5;
+    margin-top: $spacing-unit * 0.5;
+    font-size: $font-sm !important;
+  }
+  
+  input, textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $border-radius-sm;
+    padding: $spacing-unit * 0.8;
+    color: white;
+    font-size: $font-sm !important;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: $font-secondary;
+    
+    &:focus {
+      outline: none;
+      border-color: $accent-color;
+      box-shadow: 0 0 0 2px rgba($accent-color, 0.3);
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.submit-btn {
+  align-self: flex-end;
+  background-color: rgba($accent-color, 0.2);
+  color: white;
+  border: 2px solid rgba($accent-color, 0.4);
+  border-radius: $border-radius-lg;
+  padding: $spacing-unit * 0.6 $spacing-unit * 2;
+  font-size: $font-sm;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: $spacing-unit * 0.5;
+  margin-top: $spacing-unit;
+  
+  &:hover {
+    background-color: rgba($accent-color, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Responsive scaling
+@media (min-width: $breakpoint-xl) {
+  .form-group label {
+    font-size: 1.5rem;
+  }
+  
+  .form-group input, 
+  .form-group textarea {
+    font-size: 1.5rem;
+    padding: $spacing-unit;
+  }
+  
+  .submit-btn {
+    font-size: 1.5rem;
+    padding: $spacing-unit * 0.8 $spacing-unit * 2.5;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .contact-title {
+    font-size: $font-xl;
+  }
+  
+  .contact-form-layout {
+    flex-direction: column;
+    gap: $spacing-unit;
+  }
+}

@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import HomeHero from './components/HomeHero';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
+import Contact from './components/Contact';
+import MobileTopBar from './components/MobileTopBar';
 import './styles/App.scss';
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
                 return <Projects />;
             case 'about':
                 return <AboutMe />;
+            case 'contact':
+                return <Contact />;
             default:
                 return null;
         }
@@ -41,7 +45,7 @@ function App() {
                 Skip to main content
             </a>
             <aside className="sidebar-container">
-                <Sidebar />
+                <Sidebar setActiveSection={setActiveSection} />
             </aside>
             <div className="main-content">
                 <header>
@@ -51,9 +55,14 @@ function App() {
                     />
                 </header>
                 <div className="divider-horizontal"></div>
+
                 <main id="main-content" className="content">
                     {renderContent()}
                 </main>
+                {/* Mobile top bar */}
+                <div className="mobile-topbar-wrapper">
+                    <MobileTopBar setActiveSection={setActiveSection} />
+                </div>
             </div>
         </div>
     );

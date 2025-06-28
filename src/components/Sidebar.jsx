@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 
-const Sidebar = () => {
+const Sidebar = ({ setActiveSection }) => {
     const copyEmail = () => {
         navigator.clipboard.writeText('patrik.martinec1@gmail.com');
         toast.success('Email copied!', {
@@ -20,9 +20,13 @@ const Sidebar = () => {
         });
     };
 
+    const handleWorkWithMe = () => {
+        setActiveSection('contact');
+    };
+
     return (
         <section className="sidebar">
-            <ToastContainer /> {/* Toast container for notifications */}
+            <ToastContainer />
             <header>
                 <figure className="profile-image-container">
                     <img
@@ -32,9 +36,18 @@ const Sidebar = () => {
                     />
                 </figure>
                 <div className="spacer"></div>
-                <h1 className="name">Patrik Martinec</h1>
+                <h3 className="name">Patrik Martinec</h3>
             </header>
-            <button className="work-with-me-btn">Work with me</button>
+            <div className="sidebar-buttons">
+                <button
+                    className="sidebar-btn work-btn"
+                    onClick={handleWorkWithMe}
+                    aria-label="Contact me about work opportunities"
+                >
+                    Work with me
+                </button>
+                <button className="sidebar-btn cv-btn">View CV</button>
+            </div>
             <section className="info-section">
                 <div className="info-item">
                     <FontAwesomeIcon
@@ -61,7 +74,7 @@ const Sidebar = () => {
             <hr className="divider" />
             <footer className="social-links">
                 <a
-                    href="https://github.com/yourusername"
+                    href="https://github.com/patrikmartinec23"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
@@ -69,7 +82,7 @@ const Sidebar = () => {
                     <FaGithub className="social-icon" />
                 </a>
                 <a
-                    href="https://linkedin.com/in/yourusername"
+                    href="https://www.linkedin.com/in/patrik-martinec-244992323/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
@@ -77,7 +90,7 @@ const Sidebar = () => {
                     <FaLinkedin className="social-icon" />
                 </a>
                 <a
-                    href="https://twitter.com/yourusername"
+                    href="https://x.com/PatMartinec"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"
@@ -85,7 +98,7 @@ const Sidebar = () => {
                     <FaTwitter className="social-icon" />
                 </a>
                 <a
-                    href="https://youtube.com/yourusername"
+                    href="https://www.youtube.com/@patrikmartinec6149"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-link"

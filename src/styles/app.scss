@@ -4,40 +4,41 @@
 .app-container {
   display: flex;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $secondary-color;
-  overflow: hidden;
-  max-width: 1920px; // Maximum total width
-  margin: 0 auto; // Center entire layout
+  overflow-x: hidden;
+  overflow-y: visible; // Change from auto to visible
+  max-width: 1920px;
+  margin: 0 auto;
   width: 100%;
 }
 
 .sidebar-container {
   flex-shrink: 0;
   width: 450px;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow: visible; // Change from auto to visible
 }
 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-  max-width: 1400px; // Limit content width on large screens
-  margin: 0 auto; // Center the content
+  min-height: 100vh;
+  overflow: visible;
+  max-width: none; 
+  margin: 0 auto;
 }
 
 .divider-horizontal {
-  position: fixed; // Changed from absolute to fixed
-  top: 75px;
-  left: 0;
-  width: 100vw; // Full viewport width
+  position: absolute; // Change from fixed to absolute
+  top: 75px; // Keep at the same vertical position
+  left: 0; // Start from left edge of parent container
+  width: 100%; // Full width of parent (not viewport)
   height: 2px;
   background-color: rgba(255, 255, 255, 0.15);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 5; // Lower z-index so navbar stays above
 }
 
 .content {
@@ -45,9 +46,9 @@
   padding: $spacing-unit * 1.35;
   color: white;
   margin-top: 14px;
-  height: calc(100vh - 95px);
-  overflow: hidden;
-  max-width: 1200px; // Maximum content width
+  min-height: calc(100vh - 95px);
+  overflow: visible; // Change from auto to visible
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -99,4 +100,25 @@ h2 {
     margin-left: 0;
     height: auto;
   }
+}
+
+// Add a tablet breakpoint for adjusting the main content
+@media (min-width: $breakpoint-md) and (max-width: 1100px) {
+  .sidebar-container {
+    width: 350px; // Match the sidebar width from Sidebar.scss
+  }
+  
+  .main-content {
+    margin-left: 0; // Ensure there's no margin preventing expansion
+  }
+  
+  .content {
+    max-width: calc(100% - 30px); // Allow content to use most of the available width
+  }
+}
+
+@media (max-width: 850px) {
+  .divider-horizontal {
+    display: none;
+}
 }

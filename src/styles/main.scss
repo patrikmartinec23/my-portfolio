@@ -36,22 +36,28 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto; 
   box-sizing: border-box;
-  background-color: $secondary-color; // Add this line
+  background-color: $secondary-color;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
 }
 
-// Apply font family to common text elements
-h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
+h3, h4, h5, h6, p, span, a, button, input, textarea, select {
   font-family: $font-secondary;
 }
 
-h1 {
+h1, h2 {
   font-family: $font-main;
+}
+
+.hero-container, .about-container, .projects-container, .contact-container {
+  // Other properties...
+  min-height: 95%; 
+  overflow: visible; // Change from auto to visible
 }
 
 // Large screen font scaling
@@ -61,17 +67,17 @@ h1 {
   $font-md: 1.9rem;    // 30px (was 26px)
   $font-lg: 2.3rem;    // 37px (was 32px)
   $font-xl: 2.9rem;    // 46px (was 40px)
-  $font-xxl: 4.6rem;   // 74px (was 64px)
+  $font-xxl: 4.2rem;   // 74px (was 64px)
 
   $spacing-unit: 2rem;
 
   // Apply larger fonts to components
   .hero-title {
-    font-size: 4.6rem;
+    font-size: 4.2rem;
   }
   
   .about-title, .projects-title {
-    font-size: 4.6rem;
+    font-size: 4.2rem;
   }
   
   .nav-item {
@@ -79,11 +85,11 @@ h1 {
   }
   
   .name {
-    font-size: 2.9rem;
+    font-size: 2.45rem;
   }
   
   .work-with-me-btn {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
   }
   
   .info-text {
@@ -164,5 +170,24 @@ h1 {
   
   .project-card:hover, .nav-item:hover, .about-icon, .profile-image {
     transform: none !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .hero-content,
+  .about-container,
+  .projects-container,
+  .contact-container {
+    height: 80vh !important; // Match the preferred height
+    min-height: 80vh !important;
+    max-height: 80vh !important;
+  }
+
+  .content {
+    min-height: 80vh !important;
+    height: 80vh !important;
+    padding: 0;
+    padding: $spacing-unit * 0.35;
+    margin-bottom: $spacing-unit * 0.45;
   }
 }

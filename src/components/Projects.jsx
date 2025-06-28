@@ -27,7 +27,7 @@ const Projects = () => {
             description:
                 'Full-stack e-commerce solution with React frontend and Node.js backend. Features include user authentication, payment processing, and admin dashboard.',
             technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-            image: '/api/placeholder/600/400', // Replace with actual project image
+            image: '/api/placeholder/600/400',
             demoUrl: 'https://your-demo-url.com',
             githubUrl: 'https://github.com/yourusername/project2',
         },
@@ -37,17 +37,19 @@ const Projects = () => {
             description:
                 'Modern task management application with drag-and-drop functionality, real-time updates, and team collaboration features.',
             technologies: ['React', 'Firebase', 'Material-UI', 'JavaScript'],
-            image: '/api/placeholder/600/400', // Replace with actual project image
+            image: '/api/placeholder/600/400',
             demoUrl: 'https://your-demo-url.com',
             githubUrl: 'https://github.com/yourusername/project3',
         },
     ];
 
-    const nextProject = () => {
+    const nextProject = (e) => {
+        e && e.stopPropagation();
         setCurrentProject((prev) => (prev + 1) % projects.length);
     };
 
-    const prevProject = () => {
+    const prevProject = (e) => {
+        e && e.stopPropagation();
         setCurrentProject(
             (prev) => (prev - 1 + projects.length) % projects.length
         );
@@ -67,64 +69,77 @@ const Projects = () => {
                     <hr className="projects-divider" />
                 </header>
                 <section className="project-slideshow">
-                    <button
-                        className="arrow-left"
-                        aria-label="Previous project"
-                        onClick={prevProject}
-                    >
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                    </button>
-                    <article
-                        className="project-card"
-                        onClick={openDemo}
-                        onKeyDown={(e) => e.key === 'Enter' && openDemo()}
-                        role="button"
-                        aria-label={`View ${projects[currentProject].title} project demo`}
-                        tabIndex="0"
-                    >
-                        <div className="project-image-full">
-                            <img
-                                src={projects[currentProject].image}
-                                alt={projects[currentProject].title}
-                            />
-                            <div className="project-overlay-full">
-                                <div className="project-header-full">
-                                    <div className="project-title-badge">
-                                        {projects[currentProject].title}
+                    {/* Desktop/tablet: arrows outside card */}
+                    <div className="project-card-wrapper">
+                        <article
+                            className="project-card"
+                            onClick={openDemo}
+                            onKeyDown={(e) => e.key === 'Enter' && openDemo()}
+                            role="button"
+                            aria-label={`View ${projects[currentProject].title} project demo`}
+                            tabIndex="0"
+                        >
+                            {/* Arrows inside card for mobile */}
+                            <div className="project-arrows-mobile">
+                                <button
+                                    className="arrow-left"
+                                    aria-label="Previous project"
+                                    onClick={prevProject}
+                                    tabIndex={-1}
+                                >
+                                    <FontAwesomeIcon icon={faChevronLeft} />
+                                </button>
+                                <button
+                                    className="arrow-right"
+                                    aria-label="Next project"
+                                    onClick={nextProject}
+                                    tabIndex={-1}
+                                >
+                                    <FontAwesomeIcon icon={faChevronRight} />
+                                </button>
+                            </div>
+                            <div className="project-image-full">
+                                <img
+                                    src={projects[currentProject].image}
+                                    alt={projects[currentProject].title}
+                                />
+                                <div className="project-overlay-full">
+                                    <div className="project-header-full">
+                                        <div className="project-title-badge">
+                                            {projects[currentProject].title}
+                                        </div>
+                                        <div className="project-link-badge">
+                                            <FontAwesomeIcon
+                                                icon={faExternalLinkAlt}
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="project-link-badge">
-                                        <FontAwesomeIcon
-                                            icon={faExternalLinkAlt}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="project-footer-full">
-                                    <div className="project-description-badge">
-                                        {projects[currentProject].description}
-                                    </div>
-                                    <div className="project-technologies-badges">
-                                        {projects[
-                                            currentProject
-                                        ].technologies.map((tech, index) => (
-                                            <span
-                                                key={index}
-                                                className="tech-badge-full"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
+                                    <div className="project-footer-full">
+                                        <div className="project-description-badge">
+                                            {
+                                                projects[currentProject]
+                                                    .description
+                                            }
+                                        </div>
+                                        <div className="project-technologies-badges">
+                                            {projects[
+                                                currentProject
+                                            ].technologies.map(
+                                                (tech, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="tech-badge-full"
+                                                    >
+                                                        {tech}
+                                                    </span>
+                                                )
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </article>
-                    <button
-                        className="arrow-right"
-                        aria-label="Next project"
-                        onClick={nextProject}
-                    >
-                        <FontAwesomeIcon icon={faChevronRight} />
-                    </button>
+                        </article>
+                    </div>
                 </section>
             </article>
         </section>

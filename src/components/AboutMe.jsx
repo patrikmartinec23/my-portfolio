@@ -21,7 +21,13 @@ const AboutMe = () => {
                         </li>
                         <li>
                             <p>
-                                <span className="about-icon">👤</span>I Speak 3
+                                <span className="about-icon">💼</span>Previously
+                                @ LunaLabs Solutions (Magento, PHP)
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span className="about-icon">🗣️</span>I Speak 3
                                 Languages 🇬🇧 🇩🇪 🇸🇮
                             </p>
                         </li>
@@ -29,12 +35,6 @@ const AboutMe = () => {
                             <p>
                                 <span className="about-icon">🏎️</span>I Like
                                 Watching Cars Drive Around in Circles
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                <span className="about-icon">🎓</span>Computer
-                                Science and Informatics Student
                             </p>
                         </li>
                     </ul>

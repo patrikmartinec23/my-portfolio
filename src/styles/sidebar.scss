@@ -8,9 +8,9 @@
   background-color: $secondary-color;
   color: white;
   position: relative;
-  padding-top: 320px;
-  height: 100vh;
-  overflow: hidden;
+  padding-top: 320px; // Maintain padding for the image
+  min-height: 100vh;
+  overflow-y: auto; // Change from hidden to auto to enable scrolling
 }
 
 .profile-image-container {
@@ -20,8 +20,9 @@
   height: 296px;
   border-radius: 50%;
   overflow: hidden;
-  position: absolute;
+  position: absolute; 
   top: 40px;
+  left: calc(50% - 148px); 
   z-index: 20;
 }
 
@@ -41,30 +42,53 @@
 }
 
 .name {
-  font-size: $font-xl;
+  font-family: $font-main;
+  font-size: $font-lg;
   font-weight: 500;
   margin-bottom: $spacing-unit;
   text-align: start;
 }
 
-.work-with-me-btn {
+.sidebar-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: $spacing-unit * 0.5;
+  margin-bottom: $spacing-unit * 1.5;
+  width: 100%;
+}
+
+.sidebar-btn {
   background-color: rgba($accent-color, 0.2);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: $border-radius-lg;
-  padding: $spacing-unit * 0.35;
-  font-size: $font-md;
+  padding: $spacing-unit * 0.25;
+  font-size: $font-sm;
   cursor: pointer;
-  margin-bottom: $spacing-unit * 1.5;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  flex: 1;
   
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(1px);
   }
 }
 
+.work-btn {
+  background-color: rgba($accent-color, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.65);
+}
+
+.cv-btn {
+  background-color: rgba($accent-color, 0.15);
+}
+
 .info-section {
-  margin-bottom: $spacing-unit * 1.5;
+  margin-bottom: $spacing-unit;
 }
 
 .info-item {
@@ -119,10 +143,15 @@
 .social-link {
   color: white;
   font-size: $font-xl;
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.3s ease; 
   
   &:hover {
     color: $accent-color;
+    transform: scale(1.2); 
+  }
+  
+  &:active {
+    transform: scale(0.95); 
   }
 }
 
@@ -130,11 +159,176 @@
   height: $spacing-unit * 2;
 }
 
-// For responsive design
+// Tablet-specific adjustments
+@media (min-width: $breakpoint-md) and (max-width: 1100px) { // Changed from $breakpoint-lg (1024px) to 1100px
+  .sidebar {
+    width: 350px; // Reduced from 450px
+  }
+  
+  .profile-image-container {
+    width: 260px; // Increased from 240px
+    height: 260px; // Increased from 240px
+    left: calc(50% - 130px); // Adjusted for new size
+  }
+  
+  .profile-image {
+    width: 260px; // Increased from 240px
+    height: 260px; // Increased from 240px
+  }
+  
+  .name {
+    font-size: $font-md; // Slightly smaller name text
+  }
+  
+  .sidebar-btn {
+    font-size: calc($font-sm * 0.9);
+  }
+}
+
 @media (max-width: $breakpoint-md) {
   .sidebar {
     width: 100%;
     height: auto;
     max-height: 50vh;
+  }
+  
+  // Add these to handle the profile image on mobile too
+  .profile-image-container {
+    width: 200px;
+    height: 200px;
+    top: 30px;
+    left: calc(50% - 100px);
+  }
+  
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+  .mobile-topbar {
+  display: none; 
+  }
+
+@media (max-width: 850px) {
+  .sidebar-container {
+   display: none;
+}
+}
+
+@media (max-width: 850px) {
+  .sidebar-container {
+    display: none !important;
+  }
+
+  .mobile-topbar {
+    width: 100vw;
+    background: #222;
+    color: #fff;
+    padding: 1rem 1.2rem 0.5rem 1.2rem;
+    box-sizing: border-box;
+    border-bottom: 1.5px solid #444;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 100;
+    position: relative;
+    padding-bottom: $spacing-unit * 2;
+  }
+
+  .mobile-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .mobile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+  }
+
+  .mobile-name-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row; // Ensure row direction
+    margin-bottom: 0.1rem;
+  }
+
+  .mobile-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .mobile-work-btn {
+    background: none;
+    border: 2px solid #aaa;
+    color: #fff;
+    border-radius: 2rem;
+    padding: 0.3rem 1.2rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+    &:hover {
+      background: $accent-color;
+      color: #222;
+      border-color: $accent-color;
+    }
+  }
+
+  .mobile-location,
+  .mobile-email {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-direction: row; // Icon and text side by side
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    cursor: pointer;
+  }
+
+  .mobile-email {
+    cursor: pointer;
+    transition: color 0.2s;
+    &:hover {
+      color: $accent-color;
+      text-decoration: underline;
+    }
+  }
+
+  .mobile-divider {
+    width: 100%;
+    height: 2px;
+    background: #444;
+    margin: 0.8rem 0 0.5rem 0;
+    border: none;
+  }
+
+  .mobile-socials {
+    display: flex;
+    justify-content: center;
+    gap: 2.2rem;
+    margin-top: 0.2rem;
+    font-size: 2.1rem;
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; // Space between icon and text
+      color: #fff;
+      font-size: 1.2em;
+      transition: color 0.2s, transform 0.2s;
+      &:hover {
+        color: $accent-color;
+        transform: scale(1.15);
+      }
+    }
   }
 }

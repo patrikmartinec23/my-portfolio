@@ -121,7 +121,7 @@ const techStack = [
     {
         id: 'github',
         icon: faGithub,
-        color: '#181717',
+        color: '#fff',
         name: 'GitHub',
     },
 ];
@@ -153,34 +153,27 @@ const HomeHero = () => {
         const FRICTION = 0.98;
         const BOUNCE = 0.75;
 
-        // Replace this line:
-        // const BALL_RADIUS = 40;
-
-        // With this responsive ball sizing:
+        // Responsive ball sizing: smaller on small screens, larger on big screens
         const getBallRadius = () => {
             if (window.innerWidth >= 1600) {
-                return 55; // Ultra-wide screens: 55px radius
+                return 55; // Ultra-wide screens
             } else if (window.innerWidth >= 1280) {
-                return 48; // Large screens: 48px radius
+                return 48; // Large screens
+            } else if (window.innerWidth >= 850) {
+                return 40; // Tablet
+            } else if (window.innerWidth >= 600) {
+                return 28; // Small tablets/large phones
             } else {
-                return 40; // Default screens: 40px radius
+                return 22; // Small phones
             }
         };
 
         const BALL_RADIUS = getBallRadius();
 
-        // Check if device is mobile
-        const isMobile = window.innerWidth < 768;
-        const ballCount = isMobile
-            ? Math.min(8, techStack.length)
-            : techStack.length;
+        // Always show all balls, just smaller on mobile
+        const visibleTech = techStack;
 
-        // If mobile, use only the first 8 tech items
-        const visibleTech = isMobile
-            ? techStack.slice(0, ballCount)
-            : techStack;
-
-        // Create balls with proper initial positioning
+        // Create balls
         const balls = visibleTech.map((tech, index) => ({
             id: tech.id,
             x:
@@ -203,7 +196,6 @@ const HomeHero = () => {
 
         const mouse = { x: null, y: null };
 
-        // Updated drawBall function with better symbols
         const drawBall = (ball) => {
             // Draw ball background (black circle)
             ctx.beginPath();
@@ -238,7 +230,6 @@ const HomeHero = () => {
             ].includes(ball.id);
 
             if (hasRealIcon) {
-                // Use Font Awesome icons for these
                 ctx.font = `${
                     ball.radius * 1.5
                 }px "Font Awesome 6 Free", "Font Awesome 6 Brands"`;
@@ -388,10 +379,9 @@ const HomeHero = () => {
                 ball.dy *= -BOUNCE;
             }
 
-            // Enhanced mouse interaction - balls can be pushed in all directions
             if (mouse.x !== null && mouse.y !== null) {
                 const dist = Math.hypot(ball.x - mouse.x, ball.y - mouse.y);
-                const influenceRadius = 130; // Increased from 120 to 130 - even larger influence area
+                const influenceRadius = 130;
 
                 if (dist < influenceRadius && dist > 0) {
                     // Calculate direction from mouse to ball (repulsion)
@@ -400,7 +390,7 @@ const HomeHero = () => {
                         ball.x - mouse.x
                     );
                     const force =
-                        ((influenceRadius - dist) / influenceRadius) * 1.0; // Increased from 0.7 to 1.0 - much stronger force
+                        ((influenceRadius - dist) / influenceRadius) * 1.0;
 
                     // Apply force away from mouse (including upward)
                     ball.dx += Math.cos(angle) * force;
@@ -408,12 +398,12 @@ const HomeHero = () => {
 
                     // Special case: if mouse is below the ball, add extra upward force
                     if (mouse.y > ball.y) {
-                        const upwardBoost = force * 1.0; // Increased from 0.8 to 1.0 - stronger upward push
+                        const upwardBoost = force * 1.0;
                         ball.dy -= upwardBoost; // Negative dy moves ball up
                     }
 
                     // Limit velocity to prevent balls from flying off screen
-                    const maxVelocity = 18; // Increased from 15 to 18 - allow even faster movement
+                    const maxVelocity = 18;
                     const currentSpeed = Math.hypot(ball.dx, ball.dy);
                     if (currentSpeed > maxVelocity) {
                         ball.dx = (ball.dx / currentSpeed) * maxVelocity;
@@ -464,7 +454,6 @@ const HomeHero = () => {
         // Resize handler
         const handleResize = () => {
             const newRadius = getBallRadius();
-            const newIsMobile = window.innerWidth < 768;
 
             // Update canvas size
             canvas.width = container.offsetWidth;
@@ -490,43 +479,6 @@ const HomeHero = () => {
                     ball.y = playArea.top + ball.radius;
                 }
             });
-
-            // If device type changed (mobile/desktop), adjust ball count
-            if (newIsMobile !== isMobile) {
-                const newBallCount = newIsMobile
-                    ? Math.min(8, techStack.length)
-                    : techStack.length;
-
-                // Add or remove balls as needed
-                if (newIsMobile && balls.length > newBallCount) {
-                    // Remove extra balls for mobile
-                    balls.splice(newBallCount);
-                } else if (!newIsMobile && balls.length < techStack.length) {
-                    // Add missing balls for desktop
-                    const missingTech = techStack.slice(balls.length);
-                    const newBalls = missingTech.map((tech) => ({
-                        id: tech.id,
-                        x:
-                            MARGIN +
-                            BALL_RADIUS +
-                            Math.random() *
-                                (canvas.width - MARGIN * 2 - BALL_RADIUS * 2),
-                        y:
-                            MARGIN +
-                            BALL_RADIUS +
-                            Math.random() *
-                                ((canvas.height - MARGIN * 2) * 0.6),
-                        dx: (Math.random() - 0.5) * 4,
-                        dy: Math.random() * 2,
-                        radius: newRadius,
-                        icon: tech.icon,
-                        color: tech.color,
-                        name: tech.name,
-                        mass: 1,
-                    }));
-                    balls.push(...newBalls);
-                }
-            }
         };
 
         // Add resize event listener
