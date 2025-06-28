@@ -156,15 +156,15 @@ const HomeHero = () => {
         // Responsive ball sizing: smaller on small screens, larger on big screens
         const getBallRadius = () => {
             if (window.innerWidth >= 1600) {
-                return 55; // Ultra-wide screens
+                return 64; // Ultra-wide screens
             } else if (window.innerWidth >= 1280) {
-                return 48; // Large screens
+                return 52; // Large screens
             } else if (window.innerWidth >= 850) {
-                return 40; // Tablet
+                return 44; // Tablet
             } else if (window.innerWidth >= 600) {
-                return 28; // Small tablets/large phones
+                return 32; // Small tablets/large phones
             } else {
-                return 22; // Small phones
+                return 28; // Small phones
             }
         };
 
@@ -444,6 +444,24 @@ const HomeHero = () => {
         });
 
         canvas.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // --- Add these for touch support ---
+        canvas.addEventListener(
+            'touchmove',
+            (e) => {
+                const rect = canvas.getBoundingClientRect();
+                if (e.touches && e.touches.length > 0) {
+                    mouse.x = e.touches[0].clientX - rect.left;
+                    mouse.y = e.touches[0].clientY - rect.top;
+                }
+            },
+            { passive: false }
+        );
+
+        canvas.addEventListener('touchend', () => {
             mouse.x = null;
             mouse.y = null;
         });
