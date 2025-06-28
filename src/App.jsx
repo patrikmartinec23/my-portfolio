@@ -6,7 +6,7 @@ import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import MobileTopBar from './components/MobileTopBar';
-import './styles/App.scss';
+import './styles/app.scss';
 
 function App() {
     const [activeSection, setActiveSection] = useState(() => {
