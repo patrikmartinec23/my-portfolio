@@ -186,8 +186,8 @@ h1, h2 {
   .content {
     min-height: 80vh !important;
     height: 80vh !important;
-    padding: 0;
     padding: $spacing-unit * 0.35;
+    padding-top: 0;
     margin-bottom: $spacing-unit * 0.45;
   }
 }

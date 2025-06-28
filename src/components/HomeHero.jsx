@@ -20,6 +20,7 @@ import {
     faFire,
 } from '@fortawesome/free-solid-svg-icons';
 import '../styles/home-hero.scss';
+import profilePic from '../assets/profile-pick.jpg';
 
 const techStack = [
     {
@@ -130,6 +131,9 @@ const HomeHero = () => {
     const canvasRef = useRef(null);
     const containerRef = useRef(null);
 
+    const profileImg = new window.Image();
+    profileImg.src = profilePic;
+
     useEffect(() => {
         const canvas = canvasRef.current;
         const container = containerRef.current;
@@ -170,10 +174,8 @@ const HomeHero = () => {
 
         const BALL_RADIUS = getBallRadius();
 
-        // Always show all balls, just smaller on mobile
         const visibleTech = techStack;
 
-        // Create balls
         const balls = visibleTech.map((tech, index) => ({
             id: tech.id,
             x:
@@ -194,115 +196,155 @@ const HomeHero = () => {
             mass: 1,
         }));
 
+        if (window.innerWidth <= 850) {
+            balls.push({
+                id: 'profile-pic-ball',
+                x: playArea.left + (playArea.right - playArea.left) / 2,
+                y: playArea.top + (playArea.bottom - playArea.top) / 2,
+                dx: (Math.random() - 0.5) * 4,
+                dy: Math.random() * 2,
+                radius: BALL_RADIUS * 2,
+                icon: null,
+                color: '#fff',
+                name: 'ProfilePic',
+                mass: 2,
+                isProfilePic: true,
+            });
+        }
+
         const mouse = { x: null, y: null };
 
         const drawBall = (ball) => {
-            // Draw ball background (black circle)
+            ctx.save();
             ctx.beginPath();
             ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#000000'; // Black background
-            ctx.fill();
-
-            // Draw colored border
-            ctx.strokeStyle = ball.color;
-            ctx.lineWidth = 3;
-            ctx.stroke();
             ctx.closePath();
 
-            // Draw Font Awesome icons for brands that have them, alternatives for others
-            ctx.fillStyle = ball.color;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+            if (ball.isProfilePic) {
+                // Draw the image clipped in the circle
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                ctx.drawImage(
+                    profileImg,
+                    ball.x - ball.radius,
+                    ball.y - ball.radius,
+                    ball.radius * 2,
+                    ball.radius * 2
+                );
+                ctx.restore();
 
-            // Check if this tech has a real Font Awesome brand icon
-            const hasRealIcon = [
-                'react',
-                'js',
-                'css',
-                'bootstrap',
-                'node',
-                'java',
-                'python',
-                'php',
-                'figma',
-                'git',
-                'github',
-            ].includes(ball.id);
-
-            if (hasRealIcon) {
-                ctx.font = `${
-                    ball.radius * 1.5
-                }px "Font Awesome 6 Free", "Font Awesome 6 Brands"`;
-
-                // Font Awesome unicode mappings for real icons
-                let iconUnicode = '';
-                switch (ball.id) {
-                    case 'react':
-                        iconUnicode = '\uf41b';
-                        break; // React
-                    case 'js':
-                        iconUnicode = '\uf3b8';
-                        break; // JavaScript
-                    case 'css':
-                        iconUnicode = '\uf38b';
-                        break; // CSS3
-                    case 'bootstrap':
-                        iconUnicode = '\uf836';
-                        break; // Bootstrap
-                    case 'node':
-                        iconUnicode = '\uf419';
-                        break; // Node.js
-                    case 'java':
-                        iconUnicode = '\uf4e4';
-                        break; // Java
-                    case 'python':
-                        iconUnicode = '\uf3e2';
-                        break; // Python
-                    case 'php':
-                        iconUnicode = '\uf457';
-                        break; // PHP
-                    case 'figma':
-                        iconUnicode = '\uf799';
-                        break; // Figma
-                    case 'git':
-                        iconUnicode = '\uf841';
-                        break; // Git
-                    case 'github':
-                        iconUnicode = '\uf09b';
-                        break; // GitHub
-                }
-
-                ctx.fillText(iconUnicode, ball.x, ball.y);
+                // Draw border
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 4;
+                ctx.stroke();
             } else {
-                // Use alternative symbols for techs without Font Awesome brand icons
-                ctx.font = `bold ${ball.radius * 0.6}px Arial`;
+                ctx.fillStyle = '#000000';
+                ctx.fill();
+                ctx.strokeStyle = ball.color;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.closePath();
 
-                let symbol = '';
-                switch (ball.id) {
-                    case 'tailwind':
-                        symbol = '⚡';
-                        break; // Lightning for TailwindCSS
-                    case 'express':
-                        symbol = '🚀';
-                        break; // Rocket for Express
-                    case 'mongodb':
-                        symbol = '🍃';
-                        break; // Leaf for MongoDB
-                    case 'sql':
-                        symbol = '🗄️';
-                        break; // File cabinet for SQL
-                    case 'cpp':
-                        symbol = 'C++';
-                        break; // C++ text
-                    case 'firebase':
-                        symbol = '🔥';
-                        break; // Fire emoji for Firebase
-                    default:
-                        symbol = ball.name.charAt(0);
+                ctx.fillStyle = ball.color;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Check if this tech has a real Font Awesome brand icon
+                const hasRealIcon = [
+                    'react',
+                    'js',
+                    'css',
+                    'bootstrap',
+                    'node',
+                    'java',
+                    'python',
+                    'php',
+                    'figma',
+                    'git',
+                    'github',
+                ].includes(ball.id);
+
+                if (hasRealIcon) {
+                    ctx.font = `${
+                        ball.radius * 1.5
+                    }px "Font Awesome 6 Free", "Font Awesome 6 Brands"`;
+
+                    // Font Awesome unicode mappings for real icons
+                    let iconUnicode = '';
+                    switch (ball.id) {
+                        case 'react':
+                            iconUnicode = '\uf41b';
+                            break; // React
+                        case 'js':
+                            iconUnicode = '\uf3b8';
+                            break; // JavaScript
+                        case 'css':
+                            iconUnicode = '\uf38b';
+                            break; // CSS3
+                        case 'bootstrap':
+                            iconUnicode = '\uf836';
+                            break; // Bootstrap
+                        case 'node':
+                            iconUnicode = '\uf419';
+                            break; // Node.js
+                        case 'java':
+                            iconUnicode = '\uf4e4';
+                            break; // Java
+                        case 'python':
+                            iconUnicode = '\uf3e2';
+                            break; // Python
+                        case 'php':
+                            iconUnicode = '\uf457';
+                            break; // PHP
+                        case 'figma':
+                            iconUnicode = '\uf799';
+                            break; // Figma
+                        case 'git':
+                            iconUnicode = '\uf841';
+                            break; // Git
+                        case 'github':
+                            iconUnicode = '\uf09b';
+                            break; // GitHub
+                    }
+
+                    ctx.fillText(iconUnicode, ball.x, ball.y);
+                } else {
+                    // Use alternative symbols for techs without Font Awesome brand icons
+                    ctx.font = `bold ${ball.radius * 0.6}px Arial`;
+
+                    let symbol = '';
+                    switch (ball.id) {
+                        case 'tailwind':
+                            symbol = '⚡';
+                            break; // Lightning for TailwindCSS
+                        case 'express':
+                            symbol = '🚀';
+                            break; // Rocket for Express
+                        case 'mongodb':
+                            symbol = '🍃';
+                            break; // Leaf for MongoDB
+                        case 'sql':
+                            symbol = '🗄️';
+                            break; // File cabinet for SQL
+                        case 'cpp':
+                            symbol = 'C++';
+                            break; // C++ text
+                        case 'firebase':
+                            symbol = '🔥';
+                            break; // Fire emoji for Firebase
+                        default:
+                            symbol = ball.name.charAt(0);
+                    }
+
+                    ctx.fillText(symbol, ball.x, ball.y);
                 }
-
-                ctx.fillText(symbol, ball.x, ball.y);
             }
+            ctx.restore();
         };
 
         const distance = (ball1, ball2) => {
